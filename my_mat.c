@@ -3,7 +3,7 @@
 #include <math.h>
 #define n 10
 int arr[n][n];
-int min(int,int);
+int min(int, int);
 void help();
 
 void funA()
@@ -24,8 +24,8 @@ void funA()
 void funB()
 {
 
-  int i = 0;
-  int j = 0;
+  int i;
+  int j;
 
   scanf("%d%d", &i, &j);
 
@@ -33,7 +33,10 @@ void funB()
   {
     printf("False\n");
   }
-  printf("True\n");
+  else
+  {
+    printf("True\n");
+  }
 }
 
 int min(int a, int b)
@@ -42,52 +45,65 @@ int min(int a, int b)
   {
     return b;
   }
-  if(b == 0){
-    return a;
-  }
-
-   if (a > b)
-    {
-      return b;
-    }
-    return a;
-  }
-
-
-  void help()
+  if (b == 0)
   {
+    return a;
+  }
 
-    for (int k = 0; k < n; k++)
+  if (a < b)
+  {
+    return a;
+  }
+  return b;
+}
+
+void help()
+{
+  for (int k = 0; k < n; k++)
+  {
+    for (int i = 0; i < n; i++)
     {
-      for (int i = 0; i < n; i++)
+      for (int j = 0; j < n; j++)
       {
-        for (int j = 0; j < n; j++)
-        {
-          int sum = arr[i][k]+arr[k][j];
 
-          if (arr[i][k] || arr[k][j] == 0){
-          sum = 0;
+        if (i == j)
+        {
+          arr[i][j] = 0;
         }
-          arr[i][j] = min(arr[i][j],sum);
+
+        else if (i == k || k == j)
+        {
+          arr[i][j] = arr[i][j];
+        }
+        else
+        {
+          int sum = arr[i][k] + arr[k][j];
+          if (arr[i][k] == 0 || arr[k][j] == 0)
+          {
+            sum = 0;
           }
-         
-          }
+          arr[i][j] = min(arr[i][j], sum);
         }
       }
-    
-  
-
-  void funC()
-  {
-
-    int i = 0;
-    int j = 0;
-
-    scanf("%d%d", &i, &j);
-
-    if (arr[i][j] == 0)
-    {
-      printf("-1\n");
     }
+  }
+}
+
+void funC()
+{
+
+  int i;
+  int j;
+
+  scanf("%d%d", &i, &j);
+
+  if (arr[i][j] == 0 || i == j)
+  {
+    printf("-1\n");
+  }
+
+  else
+  {
     printf("%d\n", arr[i][j]);
   }
+}
